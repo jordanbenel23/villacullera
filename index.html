@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Villa Cullera ·  2026</title>
+<title>Villa Cullera · Andrés</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -81,9 +81,9 @@
 
     <!-- HEADER -->
     <div class="header">
-      <div class="eyebrow" id="t-eyebrow">Cullera · Guía personal</div>
-      <h1 class="title">Bienvenidos<br>a <em>Cullera</em></h1>
-      <div class="subtitle" id="t-subtitle">Temporada · 2026</div>
+      <div class="eyebrow" id="t-eyebrow">Cullera · Guía para huéspedes</div>
+      <h1 class="title">Bienvenidos<br>a <em>Villa Cullera</em></h1>
+      <div class="subtitle" id="t-subtitle">Temporada 2026</div>
     </div>
 
     <p class="intro" id="t-intro">
@@ -91,6 +91,27 @@
       paisajes que no olvidaréis y los mejores planes por la zona.
       Todo lo que necesitáis para disfrutar al máximo.
     </p>
+
+    <!-- ACCESS -->
+    <div class="access-box">
+      <div class="access-eyebrow" id="t-access-title">Acceso a la vivienda</div>
+      <div class="access-item">
+        <div class="access-icon">🔐</div>
+        <div class="access-text">
+          <div class="access-label" id="t-safe-label">Caja fuerte · Código</div>
+          <div class="access-value">Código <span class="code-highlight">0152</span></div>
+        </div>
+      </div>
+      <div class="access-item">
+        <div class="access-icon">🗝️</div>
+        <div class="access-text">
+          <div class="access-label" id="t-keys-label">Llaves incluidas</div>
+          <div class="access-value" id="t-keys-value">Entrada principal · Vivienda · Piscina</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
 
     <!-- RESTAURANTES -->
     <div class="section-title" id="t-sec-restaurants">🍽️ &nbsp;Restaurantes</div>
@@ -189,25 +210,6 @@
       </a>
     </div>
 
-    <!-- ACCESS -->
-    <div class="access-box">
-      <div class="access-eyebrow" id="t-access-title">Acceso a la vivienda</div>
-      <div class="access-item">
-        <div class="access-icon">🔐</div>
-        <div class="access-text">
-          <div class="access-label" id="t-safe-label">Caja fuerte · Código</div>
-          <div class="access-value">Código <span class="code-highlight">0152</span></div>
-        </div>
-      </div>
-      <div class="access-item">
-        <div class="access-icon">🗝️</div>
-        <div class="access-text">
-          <div class="access-label" id="t-keys-label">Llaves incluidas</div>
-          <div class="access-value" id="t-keys-value">Entrada principal · Vivienda · Piscina</div>
-        </div>
-      </div>
-    </div>
-
     <!-- SIGNOFF -->
     <div class="signoff">
       <div class="signoff-left">
@@ -218,8 +220,8 @@
         </a>
       </div>
       <div>
-        <div class="signoff-name">Jordan</div>
-        <div class="signoff-role" id="t-role">Co-anfitrión Villa Cullera</div>
+        <div class="signoff-name">Jordan B.</div>
+        <div class="signoff-role" id="t-role">Co-anfitrión · Villa Cullera</div>
       </div>
     </div>
 
@@ -230,8 +232,8 @@
 const translations = {
   es: {
     eyebrow: "Cullera · Guía para huéspedes",
-    subtitle: "Temporada · 2026",
-    title: "Bienvenidos<br>a <em>Cullera</em>",
+    subtitle: "Temporada 2026",
+    title: "Bienvenidos<br>a <em>Villa Cullera</em>",
     intro: "Os he preparado una selección de rincones imprescindibles — dónde comer, qué descubrir, paisajes que no olvidaréis y los mejores planes por la zona. Todo lo que necesitáis para disfrutar al máximo.",
     secRestaurants: "🍽️ &nbsp;Restaurantes",
     secVisit: "🏰 &nbsp;Qué visitar en Cullera",
@@ -247,14 +249,14 @@ const translations = {
     safeLabel: "Caja fuerte · Código",
     keysLabel: "Llaves incluidas",
     keysValue: "Entrada principal · Vivienda · Piscina",
-    signoff: "Para cualquier cosa que necesitéis,<br> ",
+    signoff: "Para cualquier cosa que necesitéis,<br>aquí me tenéis.",
     whatsapp: "Escríbeme por WhatsApp",
-    role: "Vuestro anfitrión"
+    role: "Jordan B. · Co-anfitrión · Villa Cullera"
   },
   en: {
-    eyebrow: "Cullera · Personal Guide",
-    subtitle: "Curated selection · Andrés",
-    title: "Welcome<br>to <em>Cullera</em>",
+    eyebrow: "Cullera · Guest Guide",
+    subtitle: "Season 2026",
+    title: "Welcome<br>to <em>Villa Cullera</em>",
     intro: "I've put together a selection of must-see spots — where to eat, what to discover, landscapes you won't forget and the best things to do in the area. Everything you need to make the most of your stay.",
     secRestaurants: "🍽️ &nbsp;Restaurants",
     secVisit: "🏰 &nbsp;What to visit in Cullera",
@@ -272,12 +274,12 @@ const translations = {
     keysValue: "Main entrance · Apartment · Swimming pool",
     signoff: "For anything you may need,<br>you know where to find me.",
     whatsapp: "Message me on WhatsApp",
-    role: "Your host"
+    role: "Jordan B. · Co-host · Villa Cullera"
   },
   fr: {
-    eyebrow: "Cullera · Guide personnel",
-    subtitle: "Sélection curatée · Andrés",
-    title: "Bienvenue<br>à <em>Cullera</em>",
+    eyebrow: "Cullera · Guide des hôtes",
+    subtitle: "Saison 2026",
+    title: "Bienvenue<br>à <em>Villa Cullera</em>",
     intro: "J'ai préparé pour vous une sélection de lieux incontournables — où manger, quoi découvrir, des paysages inoubliables et les meilleures activités de la région. Tout ce qu'il vous faut pour profiter au maximum.",
     secRestaurants: "🍽️ &nbsp;Restaurants",
     secVisit: "🏰 &nbsp;À visiter à Cullera",
@@ -295,7 +297,7 @@ const translations = {
     keysValue: "Entrée principale · Appartement · Piscine",
     signoff: "Pour tout ce dont vous aurez besoin,<br>vous savez où me trouver.",
     whatsapp: "Écrivez-moi sur WhatsApp",
-    role: "Votre hôte"
+    role: "Jordan B. · Co-hôte · Villa Cullera"
   }
 };
 
