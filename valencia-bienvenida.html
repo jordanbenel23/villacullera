@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valencia · Andrés</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --sand: #f5efe6;
+    --cream: #faf7f2;
+    --terracota: #c8673a;
+    --terracota-light: #e8856a;
+    --gold: #b8975a;
+    --dark: #1a1612;
+    --mid: #4a3f35;
+    --light: #8a7968;
+  }
+
+  body {
+    background: var(--cream);
+    font-family: 'Jost', sans-serif;
+    color: var(--dark);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 16px 60px;
+  }
+
+  .card {
+    max-width: 640px;
+    width: 100%;
+    position: relative;
+  }
+
+  /* Top decorative bar */
+  .top-bar {
+    height: 3px;
+    background: linear-gradient(90deg, var(--terracota), var(--gold), var(--terracota-light));
+    border-radius: 2px 2px 0 0;
+    margin-bottom: 0;
+  }
+
+  .main-panel {
+    background: white;
+    border: 1px solid rgba(184,151,90,0.2);
+    border-top: none;
+    padding: 48px 48px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Subtle background pattern */
+  .main-panel::before {
+    content: 'V';
+    position: absolute;
+    right: -20px;
+    top: -30px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 320px;
+    font-weight: 300;
+    color: rgba(200,103,58,0.04);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .header {
+    margin-bottom: 36px;
+    position: relative;
+  }
+
+  .eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--terracota);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .eyebrow::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(200,103,58,0.4), transparent);
+  }
+
+  .title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--dark);
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+
+  .title em {
+    font-style: italic;
+    color: var(--terracota);
+  }
+
+  .subtitle {
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    color: var(--light);
+    text-transform: uppercase;
+  }
+
+  .intro {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--mid);
+    font-style: italic;
+    margin-bottom: 40px;
+    padding-bottom: 36px;
+    border-bottom: 1px solid rgba(184,151,90,0.15);
+  }
+
+  /* Links section */
+  .section-title {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    margin-top: 32px;
+  }
+
+  .section-title:first-of-type {
+    margin-top: 0;
+  }
+
+  .links-grid {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .link-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 13px 16px;
+    border: 1px solid rgba(184,151,90,0.15);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    background: var(--cream);
+    cursor: pointer;
+  }
+
+  .link-item:hover {
+    border-color: var(--terracota);
+    background: rgba(200,103,58,0.04);
+    transform: translateX(3px);
+  }
+
+  .link-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--terracota);
+    min-width: 20px;
+    text-align: right;
+  }
+
+  .link-label {
+    flex: 1;
+    font-size: 12.5px;
+    font-weight: 300;
+    color: var(--mid);
+    letter-spacing: 0.02em;
+  }
+
+  .link-arrow {
+    color: var(--gold);
+    font-size: 14px;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+  }
+
+  .link-item:hover .link-arrow {
+    opacity: 1;
+  }
+
+  /* Access box */
+  .access-box {
+    margin-top: 40px;
+    padding: 24px 28px;
+    background: linear-gradient(135deg, var(--dark) 0%, #2d2520 100%);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .access-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--terracota), var(--gold));
+  }
+
+  .access-eyebrow {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .access-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  .access-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .access-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid rgba(184,151,90,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .access-text {
+    flex: 1;
+  }
+
+  .access-label {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--light);
+    margin-bottom: 3px;
+  }
+
+  .access-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-weight: 400;
+    color: white;
+    line-height: 1.4;
+  }
+
+  .code-highlight {
+    color: var(--terracota-light);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+  }
+
+  /* Sign off */
+  .signoff {
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(184,151,90,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .signoff-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-style: italic;
+    color: var(--light);
+    line-height: 1.5;
+  }
+
+  .signoff-name {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    color: var(--dark);
+    text-transform: uppercase;
+  }
+
+  .signoff-role {
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    color: var(--light);
+    text-transform: uppercase;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 32px 0;
+  }
+
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: rgba(184,151,90,0.15);
+  }
+
+  .divider-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0.5;
+  }
+
+  /* Mobile */
+  @media (max-width: 480px) {
+    .main-panel { padding: 32px 24px 28px; }
+    .title { font-size: 40px; }
+    .intro { font-size: 17px; }
+  }
+
+  /* Fade in animation */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .main-panel > * {
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .header { animation-delay: 0.05s; }
+  .intro { animation-delay: 0.1s; }
+  .links-grid { animation-delay: 0.15s; }
+  .access-box { animation-delay: 0.2s; }
+  .signoff { animation-delay: 0.25s; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="top-bar"></div>
+  <div class="main-panel">
+
+    <div class="header">
+      <div class="eyebrow">Valencia · Guía personal</div>
+      <h1 class="title">Bienvenidos<br>a <em>Valencia</em></h1>
+      <div class="subtitle">Selección curada · 2024</div>
+    </div>
+
+    <p class="intro">
+      Os he preparado una selección de rincones imprescindibles — dónde comer, qué descubrir, 
+      paisajes que no olvadaréis y los mejores sitios para tomar algo. 
+      Todo lo que necesitáis para vivir Valencia como si fuerais de aquí.
+    </p>
+
+    <div class="section-title">Gastronomía &amp; Copas</div>
+    <div class="links-grid">
+      <a class="link-item" href="https://share.google/GO6avR9xROcN6oMjE" target="_blank">
+        <span class="link-number">01</span>
+        <span class="link-label">Dónde comer — Restaurantes recomendados</span>
+        <span class="link-arrow">→</span>
+      </a>
+      <a class="link-item" href="https://share.google/pTkd9MpmX5b5A4YGn" target="_blank">
+        <span class="link-number">02</span>
+        <span class="link-label">Bares y terrazas para tomar algo</span>
+        <span class="link-arrow">→</span>
+      </a>
+      <a class="link-item" href="https://share.google/3r8Iy8FVuKtmcu61q" target="_blank">
+        <span class="link-number">03</span>
+        <span class="link-label">Cafés y espacios especiales</span>
+        <span class="link-arrow">→</span>
+      </a>
+      <a class="link-item" href="https://share.google/tUPNKFGttxHYhdjdW" target="_blank">
+        <span class="link-number">04</span>
+        <span class="link-label">Tapas y gastronomía local</span>
+        <span class="link-arrow">→</span>
+      </a>
+      <a class="link-item" href="https://share.google/MtnPuMBX8ZkjyqtrA" target="_blank">
+        <span class="link-number">05</span>
+        <span class="link-label">Planes gastronómicos imprescindibles</span>
+        <span class="link-arrow">→</span>
+      </a>
+    </div>
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-dot"></div>
+      <div class="divider-line"></div>
+    </div>
+
+    <div class="section-title">Cultura &amp; Paisajes</div>
+    <div class="links-grid">
+      <a class="link-item" href="https://share.google/vW8Et4l5T5cqLGGNA" target="_blank">
+        <span class="link-number">06</span>
+        <span class="link-label">Lugares y monumentos que visitar</span>
+        <span class="link-arrow">→</span>
+      </a>
+      <a class="link-item" href="https://share.google/P13JZBtNhs6uLDKE8" target="_blank">
+        <span class="link-number">07</span>
+        <span class="link-label">Paisajes y rincones con encanto</span>
+        <span class="link-arrow">→</span>
+      </a>
+      <a class="link-item" href="https://share.google/aK034MLPtTmn0pVoE" target="_blank">
+        <span class="link-number">08</span>
+        <span class="link-label">Cultura, arte y experiencias únicas</span>
+        <span class="link-arrow">→</span>
+      </a>
+      <a class="link-item" href="https://share.google/9JLzyAkCczKKjxhm1" target="_blank">
+        <span class="link-number">09</span>
+        <span class="link-label">Excursiones y escapadas cercanas</span>
+        <span class="link-arrow">→</span>
+      </a>
+      <a class="link-item" href="https://share.google/U4c8H1a5Pcd3alr5S" target="_blank">
+        <span class="link-number">10</span>
+        <span class="link-label">Miradores y vistas panorámicas</span>
+        <span class="link-arrow">→</span>
+      </a>
+    </div>
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-dot"></div>
+      <div class="divider-line"></div>
+    </div>
+
+    <div class="section-title">Descubrimientos extras</div>
+    <div class="links-grid">
+      <a class="link-item" href="https://share.google/fZfZLuPqPfhh3ezzo" target="_blank">
+        <span class="link-number">11</span>
+        <span class="link-label">Planes alternativos y secretos locales</span>
+        <span class="link-arrow">→</span>
+      </a>
+      <a class="link-item" href="https://share.google/9EMZ2FqP1MhWRbxTV" target="_blank">
+        <span class="link-number">12</span>
+        <span class="link-label">Mercados y ambiente valenciano</span>
+        <span class="link-arrow">→</span>
+      </a>
+      <a class="link-item" href="https://share.google/311IHPVp39BTQSw05" target="_blank">
+        <span class="link-number">13</span>
+        <span class="link-label">Ocio y entretenimiento</span>
+        <span class="link-arrow">→</span>
+      </a>
+      <a class="link-item" href="https://share.google/m8HkoyioIbD4fVJU3" target="_blank">
+        <span class="link-number">14</span>
+        <span class="link-label">Compras y zonas con carácter</span>
+        <span class="link-arrow">→</span>
+      </a>
+      <a class="link-item" href="https://share.google/u8MPqRXc8bXQGY7Mu" target="_blank">
+        <span class="link-number">15</span>
+        <span class="link-label">Lo mejor del barrio y alrededores</span>
+        <span class="link-arrow">→</span>
+      </a>
+    </div>
+
+    <!-- Access info -->
+    <div class="access-box">
+      <div class="access-eyebrow">Acceso a la vivienda</div>
+
+      <div class="access-item">
+        <div class="access-icon">🔐</div>
+        <div class="access-text">
+          <div class="access-label">Caja fuerte · Código</div>
+          <div class="access-value">Código <span class="code-highlight">0152</span></div>
+        </div>
+      </div>
+
+      <div class="access-item">
+        <div class="access-icon">🗝️</div>
+        <div class="access-text">
+          <div class="access-label">Llaves incluidas</div>
+          <div class="access-value">Entrada principal · Vivienda · Piscina</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sign off -->
+    <div class="signoff">
+      <div class="signoff-text">
+        Para cualquier cosa que necesitéis,<br>ya sabéis dónde encontrarme.
+      </div>
+      <div style="text-align:right">
+        <div class="signoff-name">Andrés</div>
+        <div class="signoff-role">Vuestro anfitrión</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
