@@ -2,331 +2,722 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Villa Cullera · Andrés</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Villa Cullera · Guest App</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --sand: #f5efe6; --cream: #faf7f2; --terracota: #c8673a;
-    --terracota-light: #e8856a; --gold: #b8975a; --dark: #1a1612;
-    --mid: #4a3f35; --light: #8a7968;
-  }
-  body { background: var(--cream); font-family: 'Jost', sans-serif; color: var(--dark); min-height: 100vh; display: flex; justify-content: center; align-items: flex-start; padding: 40px 16px 60px; }
-  .card { max-width: 640px; width: 100%; position: relative; }
-  .top-bar { height: 3px; background: linear-gradient(90deg, var(--terracota), var(--gold), var(--terracota-light)); border-radius: 2px 2px 0 0; }
-  .main-panel { background: white; border: 1px solid rgba(184,151,90,0.2); border-top: none; padding: 48px 48px 40px; position: relative; overflow: hidden; }
-  .main-panel::before { content: 'C'; position: absolute; right: -20px; top: -30px; font-family: 'Cormorant Garamond', serif; font-size: 320px; font-weight: 300; color: rgba(200,103,58,0.04); line-height: 1; pointer-events: none; user-select: none; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
-  /* Language switcher */
-  .lang-switcher { display: flex; gap: 6px; justify-content: flex-end; margin-bottom: 20px; }
-  .lang-btn { padding: 5px 10px; font-size: 10px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; border: 1px solid rgba(184,151,90,0.3); border-radius: 3px; background: transparent; color: var(--light); cursor: pointer; transition: all 0.2s ease; font-family: 'Jost', sans-serif; }
-  .lang-btn:hover { border-color: var(--terracota); color: var(--terracota); }
-  .lang-btn.active { background: var(--terracota); border-color: var(--terracota); color: white; }
+:root {
+  --nude: #f2ebe3;
+  --nude2: #e8dfd5;
+  --nude3: #d4c9bc;
+  --warm: #c4a882;
+  --gold: #b8975a;
+  --brown: #7a5c3e;
+  --dark: #2c1f14;
+  --white: #fdfaf7;
+  --text: #3d2e1e;
+  --text2: #8a7060;
+  --green: #3d6b4f;
+}
 
-  .header { margin-bottom: 36px; position: relative; }
-  .eyebrow { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--terracota); margin-bottom: 14px; display: flex; align-items: center; gap: 12px; }
-  .eyebrow::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(200,103,58,0.4), transparent); }
-  .title { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 300; line-height: 1.05; color: var(--dark); margin-bottom: 6px; letter-spacing: -0.01em; }
-  .title em { font-style: italic; color: var(--terracota); }
-  .subtitle { font-size: 12px; font-weight: 300; letter-spacing: 0.15em; color: var(--light); text-transform: uppercase; }
-  .intro { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 300; line-height: 1.7; color: var(--mid); font-style: italic; margin-bottom: 40px; padding-bottom: 36px; border-bottom: 1px solid rgba(184,151,90,0.15); }
-  .section-title { font-size: 9px; font-weight: 500; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; margin-top: 32px; }
-  .section-title:first-of-type { margin-top: 0; }
-  .links-grid { display: grid; gap: 8px; margin-bottom: 8px; }
-  .link-item { display: flex; align-items: center; gap: 14px; padding: 13px 16px; border: 1px solid rgba(184,151,90,0.15); border-radius: 4px; text-decoration: none; transition: all 0.2s ease; background: var(--cream); cursor: pointer; }
-  .link-item:hover { border-color: var(--terracota); background: rgba(200,103,58,0.04); transform: translateX(3px); }
-  .link-icon { font-size: 16px; min-width: 24px; text-align: center; }
-  .link-label { flex: 1; font-size: 12.5px; font-weight: 300; color: var(--mid); letter-spacing: 0.02em; }
-  .link-arrow { color: var(--gold); font-size: 14px; opacity: 0.6; transition: opacity 0.2s; }
-  .link-item:hover .link-arrow { opacity: 1; }
-  .access-box { margin-top: 40px; padding: 24px 28px; background: linear-gradient(135deg, var(--dark) 0%, #2d2520 100%); border-radius: 4px; position: relative; overflow: hidden; }
-  .access-box::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--terracota), var(--gold)); }
-  .access-eyebrow { font-size: 9px; font-weight: 500; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
-  .access-item { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 14px; }
-  .access-item:last-child { margin-bottom: 0; }
-  .access-icon { width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(184,151,90,0.3); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; margin-top: 2px; }
-  .access-text { flex: 1; }
-  .access-label { font-size: 9px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--light); margin-bottom: 3px; }
-  .access-value { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 400; color: white; line-height: 1.4; }
-  .code-highlight { color: var(--terracota-light); font-weight: 600; letter-spacing: 0.1em; }
-  .signoff { margin-top: 36px; padding-top: 28px; border-top: 1px solid rgba(184,151,90,0.15); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
-  .signoff-left { flex: 1; }
-  .signoff-text { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-style: italic; color: var(--light); line-height: 1.5; margin-bottom: 14px; }
-  .whatsapp-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: #25D366; color: white; text-decoration: none; border-radius: 4px; font-size: 12.5px; font-weight: 400; letter-spacing: 0.05em; font-family: 'Jost', sans-serif; transition: background 0.2s ease, transform 0.2s ease; }
-  .whatsapp-btn:hover { background: #1ebe5d; transform: translateY(-1px); }
-  .signoff-name { font-size: 11px; font-weight: 400; letter-spacing: 0.2em; color: var(--dark); text-transform: uppercase; text-align: right; }
-  .signoff-role { font-size: 10px; font-weight: 300; letter-spacing: 0.15em; color: var(--light); text-transform: uppercase; text-align: right; margin-top: 4px; }
-  .divider { display: flex; align-items: center; gap: 16px; margin: 32px 0; }
-  .divider-line { flex: 1; height: 1px; background: rgba(184,151,90,0.15); }
-  .divider-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--gold); opacity: 0.5; }
-  @media (max-width: 480px) { .main-panel { padding: 32px 24px 28px; } .title { font-size: 38px; } .intro { font-size: 17px; } }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-  .main-panel > * { animation: fadeUp 0.5s ease both; }
-  .header { animation-delay: 0.05s; } .intro { animation-delay: 0.1s; }
-  .links-grid { animation-delay: 0.15s; } .access-box { animation-delay: 0.2s; } .signoff { animation-delay: 0.25s; }
+body {
+  background: var(--nude);
+  font-family: 'Inter', sans-serif;
+  color: var(--text);
+  min-height: 100vh;
+  max-width: 430px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* ── HERO ── */
+.hero {
+  background: linear-gradient(160deg, #2c1f14 0%, #4a3020 60%, #7a5030 100%);
+  padding: 52px 28px 44px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 0; right: 0;
+  height: 28px;
+  background: var(--nude);
+  border-radius: 28px 28px 0 0;
+}
+.hero-bg-text {
+  position: absolute;
+  bottom: 20px; right: -10px;
+  font-family: 'Playfair Display', serif;
+  font-size: 140px;
+  color: rgba(255,255,255,0.04);
+  line-height: 1;
+  pointer-events: none;
+  font-style: italic;
+}
+
+.lang-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 36px; }
+.villa-badge { font-size: 10px; font-weight: 400; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+.lang-pills { display: flex; gap: 6px; }
+.lang-btn {
+  padding: 5px 11px;
+  font-size: 9px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 20px;
+  background: transparent; color: rgba(255,255,255,0.45);
+  cursor: pointer; font-family: 'Inter', sans-serif;
+  transition: all 0.2s;
+}
+.lang-btn.active { background: var(--warm); border-color: var(--warm); color: white; }
+
+.hero-eyebrow { font-size: 9px; font-weight: 400; letter-spacing: 0.35em; text-transform: uppercase; color: var(--warm); margin-bottom: 10px; }
+.hero-title { font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 400; color: white; line-height: 1.1; margin-bottom: 6px; }
+.hero-title em { font-style: italic; color: var(--warm); }
+.hero-season { font-size: 10px; font-weight: 300; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 28px; }
+
+.hero-address-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 11px; font-weight: 300; color: rgba(255,255,255,0.55);
+}
+.hero-address-pill span { color: var(--warm); }
+
+/* ── NAV GRID ── */
+.nav-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 24px 20px 20px;
+}
+
+.nav-card {
+  background: var(--white);
+  border-radius: 18px;
+  padding: 18px 12px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 12px rgba(44,31,20,0.06);
+}
+.nav-card:active { transform: scale(0.96); }
+.nav-card.active {
+  background: var(--dark);
+  border-color: var(--dark);
+  box-shadow: 0 4px 20px rgba(44,31,20,0.25);
+}
+.nav-card-icon {
+  width: 44px; height: 44px;
+  border-radius: 14px;
+  background: var(--nude);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  transition: all 0.2s;
+}
+.nav-card.active .nav-card-icon { background: rgba(255,255,255,0.1); }
+.nav-card-label {
+  font-size: 10px; font-weight: 500; letter-spacing: 0.05em;
+  color: var(--text2); text-align: center; line-height: 1.3;
+  transition: color 0.2s;
+}
+.nav-card.active .nav-card-label { color: rgba(255,255,255,0.7); }
+
+/* ── SECTIONS ── */
+.section { display: none; padding: 8px 20px 100px; animation: fadeUp 0.3s ease; }
+.section.active { display: block; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+
+.sec-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px; font-weight: 400;
+  color: var(--dark); margin-bottom: 4px;
+}
+.sec-heading em { font-style: italic; color: var(--brown); }
+.sec-sub { font-size: 11px; font-weight: 300; color: var(--text2); letter-spacing: 0.1em; margin-bottom: 24px; }
+
+/* ── CARDS ── */
+.card {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 16px rgba(44,31,20,0.06);
+}
+.card-label {
+  font-size: 9px; font-weight: 500; letter-spacing: 0.35em;
+  text-transform: uppercase; color: var(--warm); margin-bottom: 14px;
+}
+
+/* ACCESS */
+.access-hero {
+  background: linear-gradient(135deg, var(--dark), #4a3020);
+  border-radius: 20px; padding: 24px; margin-bottom: 12px;
+  position: relative; overflow: hidden;
+}
+.access-hero::before { content:''; position:absolute; top:0;left:0;right:0; height:2px; background: linear-gradient(90deg, var(--warm), var(--gold)); }
+.access-hero-label { font-size: 9px; font-weight: 400; letter-spacing: 0.35em; text-transform: uppercase; color: var(--warm); margin-bottom: 18px; }
+.access-row { display: flex; gap: 12px; margin-bottom: 12px; }
+.access-box {
+  flex: 1; background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 14px; padding: 14px;
+}
+.access-box-label { font-size: 8px; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 4px; }
+.access-box-val { font-family: 'Playfair Display', serif; font-size: 22px; color: white; }
+.access-code { color: #e8a87c; font-weight: 500; letter-spacing: 0.1em; }
+.access-keys {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 14px; padding: 14px;
+}
+.access-keys-label { font-size: 8px; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 6px; }
+.key-pill {
+  display: inline-block; background: rgba(255,255,255,0.1);
+  border-radius: 20px; padding: 4px 10px;
+  font-size: 11px; color: rgba(255,255,255,0.7);
+  margin: 2px 3px 2px 0;
+}
+
+/* INFO ROWS */
+.info-row { display: flex; align-items: center; gap: 14px; padding: 13px 0; border-bottom: 1px solid rgba(44,31,20,0.06); }
+.info-row:last-child { border-bottom: none; padding-bottom: 0; }
+.info-icon-box {
+  width: 40px; height: 40px; border-radius: 12px;
+  background: var(--nude); display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0;
+}
+.info-text { flex: 1; }
+.info-label { font-size: 9px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text2); margin-bottom: 2px; }
+.info-val { font-size: 14px; font-weight: 400; color: var(--dark); }
+
+/* MAP BTN */
+.map-btn {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; padding: 14px;
+  background: var(--dark); color: white;
+  border-radius: 14px; text-decoration: none;
+  font-size: 12px; font-weight: 500; letter-spacing: 0.08em;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.2s; margin-top: 14px;
+}
+.map-btn:active { transform: scale(0.97); }
+
+/* WIFI */
+.wifi-card {
+  background: linear-gradient(135deg, #1a2e24, #2a4535);
+  border-radius: 20px; padding: 24px; margin-bottom: 12px;
+  position: relative; overflow: hidden;
+}
+.wifi-card::before { content:''; position:absolute; top:0;left:0;right:0; height:2px; background: linear-gradient(90deg, #3d9e6b, #25D366); }
+.wifi-name-label { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 4px; }
+.wifi-name { font-family: 'Playfair Display', serif; font-size: 26px; color: white; margin-bottom: 18px; }
+.wifi-pass-row {
+  background: rgba(0,0,0,0.2); border-radius: 14px;
+  padding: 14px 16px; display: flex; align-items: center; justify-content: space-between;
+}
+.wifi-pass-label { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 3px; }
+.wifi-pass-val { font-size: 20px; font-weight: 500; color: #4ade80; font-family: monospace; letter-spacing: 0.1em; }
+.copy-btn {
+  background: rgba(255,255,255,0.12); border: none;
+  border-radius: 10px; padding: 8px 14px;
+  color: white; font-size: 10px; font-weight: 500;
+  cursor: pointer; font-family: 'Inter', sans-serif;
+  letter-spacing: 0.1em; transition: all 0.2s;
+}
+.copy-btn:active { transform: scale(0.95); background: rgba(74,222,128,0.3); }
+
+/* RULES */
+.rule-row {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 13px 0; border-bottom: 1px solid rgba(44,31,20,0.06);
+}
+.rule-row:last-child { border-bottom: none; }
+.rule-icon-box {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: var(--nude); display: flex; align-items: center; justify-content: center;
+  font-size: 17px; flex-shrink: 0; margin-top: 2px;
+}
+.rule-text { font-size: 13px; font-weight: 300; color: var(--text); line-height: 1.5; padding-top: 8px; }
+
+/* LINK ITEMS */
+.link-item {
+  display: flex; align-items: center; gap: 14px;
+  padding: 13px 16px; border-radius: 14px;
+  text-decoration: none; transition: all 0.2s;
+  background: var(--white); margin-bottom: 8px;
+  box-shadow: 0 1px 8px rgba(44,31,20,0.05);
+}
+.link-item:active { transform: scale(0.98); background: var(--nude); }
+.link-icon-box {
+  width: 40px; height: 40px; border-radius: 12px;
+  background: var(--nude); display: flex; align-items: center;
+  justify-content: center; font-size: 18px; flex-shrink: 0;
+}
+.link-label { flex: 1; font-size: 13px; font-weight: 400; color: var(--dark); }
+.link-chevron { color: var(--nude3); font-size: 16px; }
+
+/* CATEGORY LABEL */
+.cat-label {
+  font-size: 9px; font-weight: 600; letter-spacing: 0.35em;
+  text-transform: uppercase; color: var(--text2);
+  margin: 20px 0 10px; padding-left: 4px;
+}
+
+/* CHECKOUT STEPS */
+.step-row {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 13px 0; border-bottom: 1px solid rgba(44,31,20,0.06);
+}
+.step-row:last-child { border-bottom: none; }
+.step-num {
+  width: 30px; height: 30px; border-radius: 10px;
+  background: var(--dark); color: white;
+  font-size: 12px; font-weight: 500;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 2px;
+}
+.step-text { font-size: 13px; font-weight: 300; color: var(--text); line-height: 1.5; padding-top: 6px; }
+
+/* FAREWELL */
+.farewell {
+  background: linear-gradient(135deg, var(--dark), #4a3020);
+  border-radius: 20px; padding: 28px 24px;
+  text-align: center; margin-top: 12px;
+  position: relative; overflow: hidden;
+}
+.farewell::before { content:''; position:absolute; top:0;left:0;right:0; height:2px; background: linear-gradient(90deg, var(--warm), var(--gold)); }
+.farewell-stars { font-size: 22px; letter-spacing: 3px; margin-bottom: 12px; }
+.farewell-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px; font-style: italic; color: white;
+  line-height: 1.7; margin-bottom: 8px;
+}
+.farewell-sub { font-size: 11px; font-weight: 300; color: rgba(255,255,255,0.4); margin-bottom: 20px; }
+.review-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 24px; background: var(--warm); color: white;
+  border-radius: 14px; text-decoration: none;
+  font-size: 12px; font-weight: 500; letter-spacing: 0.08em;
+  font-family: 'Inter', sans-serif; transition: all 0.2s;
+}
+.review-btn:active { transform: scale(0.97); }
+
+/* CONTACT */
+.contact-hero {
+  background: linear-gradient(135deg, var(--dark), #4a3020);
+  border-radius: 20px; padding: 24px; margin-bottom: 12px;
+  position: relative; overflow: hidden;
+}
+.contact-hero::before { content:''; position:absolute; top:0;left:0;right:0; height:2px; background: linear-gradient(90deg, var(--warm), var(--gold)); }
+.contact-avatar {
+  width: 56px; height: 56px; border-radius: 18px;
+  background: var(--warm); display: flex; align-items: center; justify-content: center;
+  font-size: 24px; margin-bottom: 14px;
+}
+.contact-name { font-family: 'Playfair Display', serif; font-size: 24px; color: white; margin-bottom: 2px; }
+.contact-role { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--warm); margin-bottom: 18px; }
+.wa-btn {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; padding: 14px;
+  background: #25D366; color: white;
+  border-radius: 14px; text-decoration: none;
+  font-size: 13px; font-weight: 500;
+  font-family: 'Inter', sans-serif; transition: all 0.2s;
+}
+.wa-btn:active { transform: scale(0.97); }
+
+/* BOTTOM PADDING */
+.bottom-spacer { height: 40px; }
 </style>
 </head>
 <body>
-<div class="card">
-  <div class="top-bar"></div>
-  <div class="main-panel">
 
-    <!-- LANGUAGE SWITCHER -->
-    <div class="lang-switcher">
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg-text">VC</div>
+  <div class="lang-row">
+    <div class="villa-badge">Villa Cullera</div>
+    <div class="lang-pills">
       <button class="lang-btn active" onclick="setLang('es')">ES</button>
       <button class="lang-btn" onclick="setLang('en')">EN</button>
       <button class="lang-btn" onclick="setLang('fr')">FR</button>
     </div>
-
-    <!-- HEADER -->
-    <div class="header">
-      <div class="eyebrow" id="t-eyebrow">Cullera · Guía para huéspedes</div>
-      <h1 class="title">Bienvenidos<br>a <em>Villa Cullera</em></h1>
-      <div class="subtitle" id="t-subtitle">Temporada 2026</div>
-    </div>
-
-    <p class="intro" id="t-intro">
-      Os he preparado una selección de rincones imprescindibles — dónde comer, qué descubrir,
-      paisajes que no olvidaréis y los mejores planes por la zona.
-      Todo lo que necesitáis para disfrutar al máximo.
-    </p>
-
-    <!-- ACCESS -->
-    <div class="access-box">
-      <div class="access-eyebrow" id="t-access-title">Acceso a la vivienda</div>
-      <div class="access-item">
-        <div class="access-icon">🔐</div>
-        <div class="access-text">
-          <div class="access-label" id="t-safe-label">Caja fuerte · Código</div>
-          <div class="access-value">Código <span class="code-highlight">0152</span></div>
-        </div>
-      </div>
-      <div class="access-item">
-        <div class="access-icon">🗝️</div>
-        <div class="access-text">
-          <div class="access-label" id="t-keys-label">Llaves incluidas</div>
-          <div class="access-value" id="t-keys-value">Entrada principal · Vivienda · Piscina</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
-
-    <!-- RESTAURANTES -->
-    <div class="section-title" id="t-sec-restaurants">🍽️ &nbsp;Restaurantes</div>
-    <div class="links-grid">
-      <a class="link-item" href="https://share.google/GO6avR9xROcN6oMjE" target="_blank">
-        <span class="link-icon">🦑</span><span class="link-label">Perla Negra</span><span class="link-arrow">→</span>
-      </a>
-      <a class="link-item" href="https://share.google/9JLzyAkCczKKjxhm1" target="_blank">
-        <span class="link-icon">🐟</span><span class="link-label">El Rincón del Faro</span><span class="link-arrow">→</span>
-      </a>
-      <a class="link-item" href="https://share.google/U4c8H1a5Pcd3alr5S" target="_blank">
-        <span class="link-icon">🥘</span><span class="link-label">Casa Salvador</span><span class="link-arrow">→</span>
-      </a>
-      <a class="link-item" href="https://share.google/1fkvWBoJI0tITSl5M" target="_blank">
-        <span class="link-icon">🌊</span><span class="link-label">Mar de Oro</span><span class="link-arrow">→</span>
-      </a>
-    </div>
-
-    <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
-
-    <!-- LUGARES -->
-    <div class="section-title" id="t-sec-visit">🏰 &nbsp;Qué visitar en Cullera</div>
-    <div class="links-grid">
-      <a class="link-item" href="https://share.google/pTkd9MpmX5b5A4YGn" target="_blank">
-        <span class="link-icon">🏯</span><span class="link-label">Castillo de Cullera</span><span class="link-arrow">→</span>
-      </a>
-      <a class="link-item" href="https://share.google/vW8Et4l5T5cqLGGNA" target="_blank">
-        <span class="link-icon">💡</span><span class="link-label">Faro de Cullera</span><span class="link-arrow">→</span>
-      </a>
-      <a class="link-item" href="https://share.google/P13JZBtNhs6uLDKE8" target="_blank">
-        <span class="link-icon">🐉</span><span class="link-label">La Cueva del Dragut</span><span class="link-arrow">→</span>
-      </a>
-      <a class="link-item" href="https://share.google/aK034MLPtTmn0pVoE" target="_blank">
-        <span class="link-icon">🎢</span><span class="link-label">Aquopolis — <span class="t-aquo">Parque Acuático</span></span><span class="link-arrow">→</span>
-      </a>
-    </div>
-
-    <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
-
-    <!-- NATURALEZA -->
-    <div class="section-title" id="t-sec-nature">🌿 &nbsp;Naturaleza y paisajes</div>
-    <div class="links-grid">
-      <a class="link-item" href="https://share.google/3r8Iy8FVuKtmcu61q" target="_blank">
-        <span class="link-icon">🦢</span><span class="link-label">Reserva Natural Estany de Cullera</span><span class="link-arrow">→</span>
-      </a>
-      <a class="link-item" href="https://share.google/tUPNKFGttxHYhdjdW" target="_blank">
-        <span class="link-icon">🐦</span><span class="link-label">Azud de la Marquesa — <span class="t-birds">Observación de aves</span></span><span class="link-arrow">→</span>
-      </a>
-      <a class="link-item" href="https://share.google/MtnPuMBX8ZkjyqtrA" target="_blank">
-        <span class="link-icon">🚣</span><span class="link-label" id="t-boat">Paseos en barca en Cullera</span><span class="link-arrow">→</span>
-      </a>
-      <a class="link-item" href="https://share.google/m8HkoyioIbD4fVJU3" target="_blank">
-        <span class="link-icon">🌅</span><span class="link-label">Parque Natural de la Albufera</span><span class="link-arrow">→</span>
-      </a>
-    </div>
-
-    <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
-
-    <!-- RUTAS -->
-    <div class="section-title" id="t-sec-routes">🥾 &nbsp;Rutas por Cullera</div>
-    <div class="links-grid">
-      <a class="link-item" href="https://share.google/7XfM9ViTDkg3TUT2p" target="_blank">
-        <span class="link-icon">🌐</span><span class="link-label">Wikiloc · Ruta Cullera Bola Meteorológica</span><span class="link-arrow">→</span>
-      </a>
-      <a class="link-item" href="https://share.google/0kSrV7tBmeaZxvUbu" target="_blank">
-        <span class="link-icon">🏖️</span><span class="link-label">Wikiloc · Desembocadura del Júcar, Playa del Marenyet y Estany</span><span class="link-arrow">→</span>
-      </a>
-      <a class="link-item" href="https://share.google/ycQVwo3LEOHCgC1cm" target="_blank">
-        <span class="link-icon">⛰️</span><span class="link-label">Wikiloc · Subida Montaña Cullera, Castillo, Bola y Bajada por el Faro</span><span class="link-arrow">→</span>
-      </a>
-    </div>
-
-    <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
-
-    <!-- VALENCIA -->
-    <div class="section-title" id="t-sec-valencia">🏙️ &nbsp;Valencia ciudad</div>
-    <div class="links-grid">
-      <a class="link-item" href="https://share.google/fZfZLuPqPfhh3ezzo" target="_blank">
-        <span class="link-icon">🚀</span><span class="link-label">Ciudad de las Artes y las Ciencias</span><span class="link-arrow">→</span>
-      </a>
-      <a class="link-item" href="https://share.google/9EMZ2FqP1MhWRbxTV" target="_blank">
-        <span class="link-icon">🦁</span><span class="link-label">BIOPARC Valencia</span><span class="link-arrow">→</span>
-      </a>
-      <a class="link-item" href="https://share.google/311IHPVp39BTQSw05" target="_blank">
-        <span class="link-icon">🗼</span><span class="link-label">Torres de Serranos</span><span class="link-arrow">→</span>
-      </a>
-    </div>
-
-    <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
-
-    <!-- ÚTIL -->
-    <div class="section-title" id="t-sec-useful">🛒 &nbsp;Útil</div>
-    <div class="links-grid">
-      <a class="link-item" href="https://share.google/u8MPqRXc8bXQGY7Mu" target="_blank">
-        <span class="link-icon">🛍️</span><span class="link-label" id="t-supermarket">Consum Supermercado</span><span class="link-arrow">→</span>
-      </a>
-    </div>
-
-    <!-- SIGNOFF -->
-    <div class="signoff">
-      <div class="signoff-left">
-        <div class="signoff-text" id="t-signoff">Para cualquier cosa que necesitéis,<br>aquí me tenéis.</div>
-        <a href="https://wa.me/34614765492" target="_blank" class="whatsapp-btn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.845L.057 23.617a.75.75 0 0 0 .92.92l5.772-1.471A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.853 0-3.587-.5-5.084-1.375l-.36-.214-3.733.952.968-3.636-.235-.374A9.96 9.96 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-          <span id="t-whatsapp">Escríbeme por WhatsApp</span>
-        </a>
-      </div>
-      <div>
-        <div class="signoff-name">Jordan B.</div>
-        <div class="signoff-role" id="t-role">Co-anfitrión · Villa Cullera</div>
-      </div>
-    </div>
-
+  </div>
+  <div class="hero-eyebrow" id="t-eyebrow">Guía para huéspedes</div>
+  <div class="hero-title">Bienvenidos a<br><em>Villa Cullera</em></div>
+  <div class="hero-season" id="t-season">Temporada 2026</div>
+  <div class="hero-address-pill">
+    <span>📍</span> Calle Barranc de Palomes 52, Faro de Cullera
   </div>
 </div>
 
+<!-- NAV GRID -->
+<div class="nav-grid">
+  <div class="nav-card active" onclick="showSection('checkin')" id="nav-checkin">
+    <div class="nav-card-icon">🔑</div>
+    <div class="nav-card-label" id="t-nav-checkin">Check-in</div>
+  </div>
+  <div class="nav-card" onclick="showSection('wifi')" id="nav-wifi">
+    <div class="nav-card-icon">📶</div>
+    <div class="nav-card-label" id="t-nav-wifi">WiFi</div>
+  </div>
+  <div class="nav-card" onclick="showSection('rules')" id="nav-rules">
+    <div class="nav-card-icon">📋</div>
+    <div class="nav-card-label" id="t-nav-rules">Normas</div>
+  </div>
+  <div class="nav-card" onclick="showSection('guide')" id="nav-guide">
+    <div class="nav-card-icon">🗺️</div>
+    <div class="nav-card-label" id="t-nav-guide">Guía local</div>
+  </div>
+  <div class="nav-card" onclick="showSection('checkout')" id="nav-checkout">
+    <div class="nav-card-icon">🚪</div>
+    <div class="nav-card-label" id="t-nav-checkout">Check-out</div>
+  </div>
+  <div class="nav-card" onclick="showSection('contact')" id="nav-contact">
+    <div class="nav-card-icon">💬</div>
+    <div class="nav-card-label" id="t-nav-contact">Contacto</div>
+  </div>
+</div>
+
+<!-- CHECK-IN -->
+<div class="section active" id="section-checkin">
+  <div class="sec-heading" id="t-checkin-heading">Acceso</div>
+  <div class="sec-sub" id="t-checkin-sub">Todo lo que necesitas para entrar</div>
+
+  <div class="access-hero">
+    <div class="access-hero-label" id="t-access-label">Acceso a la vivienda</div>
+    <div class="access-row">
+      <div class="access-box">
+        <div class="access-box-label" id="t-safe-label">Caja fuerte</div>
+        <div class="access-box-val">🔐 <span class="access-code">0152</span></div>
+      </div>
+      <div class="access-box">
+        <div class="access-box-label" id="t-time-label">Check-in</div>
+        <div class="access-box-val" style="font-size:16px;">15:00 – 22:00</div>
+      </div>
+    </div>
+    <div class="access-keys">
+      <div class="access-keys-label" id="t-keys-label">Llaves incluidas</div>
+      <span class="key-pill" id="t-key1">🚪 Entrada</span>
+      <span class="key-pill" id="t-key2">🏠 Vivienda</span>
+      <span class="key-pill" id="t-key3">🏊 Piscina</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-label" id="t-address-label">Dirección</div>
+    <div class="info-row">
+      <div class="info-icon-box">📍</div>
+      <div class="info-text">
+        <div class="info-label" id="t-addr-label">Dirección completa</div>
+        <div class="info-val">Calle Barranc de Palomes 52<br>46408 Faro de Cullera, Valencia</div>
+      </div>
+    </div>
+    <div class="info-row">
+      <div class="info-icon-box">🛵</div>
+      <div class="info-text">
+        <div class="info-label" id="t-delivery-label">Para pedidos a domicilio</div>
+        <div class="info-val">Calle Barranc de Palomes 52, Faro de Cullera</div>
+      </div>
+    </div>
+    <a href="https://maps.google.com/?q=Calle+Barranc+de+Palomes+52,+46408+Faro+de+Cullera" target="_blank" class="map-btn">
+      🗺️ <span id="t-map-btn">Abrir en Google Maps</span>
+    </a>
+  </div>
+</div>
+
+<!-- WIFI -->
+<div class="section" id="section-wifi">
+  <div class="sec-heading">WiFi</div>
+  <div class="sec-sub" id="t-wifi-sub">Conexión rápida y gratuita</div>
+
+  <div class="wifi-card">
+    <div class="wifi-name-label" id="t-wifi-net-label">Red WiFi</div>
+    <div class="wifi-name">📶 capblanc52</div>
+    <div class="wifi-pass-row">
+      <div>
+        <div class="wifi-pass-label" id="t-wifi-pass-label">Contraseña</div>
+        <div class="wifi-pass-val">12345678</div>
+      </div>
+      <button class="copy-btn" onclick="copyWifi()" id="t-copy-btn">Copiar</button>
+    </div>
+  </div>
+
+  <div class="card" style="text-align:center; padding:28px;">
+    <div style="font-size:44px; margin-bottom:10px;">📱</div>
+    <div style="font-size:13px; font-weight:300; color:var(--text2); line-height:1.6;" id="t-wifi-tip">
+      Conéctate a <strong style="color:var(--dark)">capblanc52</strong><br>e introduce la contraseña
+    </div>
+  </div>
+</div>
+
+<!-- NORMAS -->
+<div class="section" id="section-rules">
+  <div class="sec-heading" id="t-rules-heading">Normas</div>
+  <div class="sec-sub" id="t-rules-sub">Por favor, respétalas durante tu estancia</div>
+
+  <div class="card">
+    <div class="rule-row"><div class="rule-icon-box">🚭</div><div class="rule-text" id="t-r1">No fumar en el interior de la vivienda</div></div>
+    <div class="rule-row"><div class="rule-icon-box">🎉</div><div class="rule-text" id="t-r2">No se permiten fiestas ni eventos</div></div>
+    <div class="rule-row"><div class="rule-icon-box">🔇</div><div class="rule-text" id="t-r3">Silencio a partir de las 23:00h</div></div>
+    <div class="rule-row"><div class="rule-icon-box">🐾</div><div class="rule-text" id="t-r4">No se admiten mascotas sin autorización</div></div>
+    <div class="rule-row"><div class="rule-icon-box">💎</div><div class="rule-text" id="t-r5">Cuida la vivienda como si fuera tuya</div></div>
+    <div class="rule-row"><div class="rule-icon-box">🙏</div><div class="rule-text" id="t-r6">Cualquier incidencia, avisa al co-anfitrión</div></div>
+  </div>
+</div>
+
+<!-- GUÍA -->
+<div class="section" id="section-guide">
+  <div class="sec-heading" id="t-guide-heading">Guía local</div>
+  <div class="sec-sub" id="t-guide-sub">Lo mejor de Cullera y Valencia</div>
+
+  <div class="cat-label" id="t-cat-restaurants">🍽️ Restaurantes</div>
+  <a class="link-item" href="https://share.google/GO6avR9xROcN6oMjE" target="_blank"><div class="link-icon-box">🦑</div><div class="link-label">Perla Negra</div><div class="link-chevron">›</div></a>
+  <a class="link-item" href="https://share.google/9JLzyAkCczKKjxhm1" target="_blank"><div class="link-icon-box">🐟</div><div class="link-label">El Rincón del Faro</div><div class="link-chevron">›</div></a>
+  <a class="link-item" href="https://share.google/U4c8H1a5Pcd3alr5S" target="_blank"><div class="link-icon-box">🥘</div><div class="link-label">Casa Salvador</div><div class="link-chevron">›</div></a>
+  <a class="link-item" href="https://share.google/1fkvWBoJI0tITSl5M" target="_blank"><div class="link-icon-box">🌊</div><div class="link-label">Mar de Oro</div><div class="link-chevron">›</div></a>
+
+  <div class="cat-label" id="t-cat-visit">🏰 Qué visitar</div>
+  <a class="link-item" href="https://share.google/pTkd9MpmX5b5A4YGn" target="_blank"><div class="link-icon-box">🏯</div><div class="link-label">Castillo de Cullera</div><div class="link-chevron">›</div></a>
+  <a class="link-item" href="https://share.google/vW8Et4l5T5cqLGGNA" target="_blank"><div class="link-icon-box">💡</div><div class="link-label">Faro de Cullera</div><div class="link-chevron">›</div></a>
+  <a class="link-item" href="https://share.google/P13JZBtNhs6uLDKE8" target="_blank"><div class="link-icon-box">🐉</div><div class="link-label">La Cueva del Dragut</div><div class="link-chevron">›</div></a>
+  <a class="link-item" href="https://share.google/aK034MLPtTmn0pVoE" target="_blank"><div class="link-icon-box">🎢</div><div class="link-label" id="t-aquo">Aquopolis — Parque Acuático</div><div class="link-chevron">›</div></a>
+
+  <div class="cat-label" id="t-cat-nature">🌿 Naturaleza</div>
+  <a class="link-item" href="https://share.google/3r8Iy8FVuKtmcu61q" target="_blank"><div class="link-icon-box">🦢</div><div class="link-label">Reserva Natural Estany de Cullera</div><div class="link-chevron">›</div></a>
+  <a class="link-item" href="https://share.google/tUPNKFGttxHYhdjdW" target="_blank"><div class="link-icon-box">🐦</div><div class="link-label" id="t-azud">Azud de la Marquesa — Aves</div><div class="link-chevron">›</div></a>
+  <a class="link-item" href="https://share.google/MtnPuMBX8ZkjyqtrA" target="_blank"><div class="link-icon-box">🚣</div><div class="link-label" id="t-boat">Paseos en barca en Cullera</div><div class="link-chevron">›</div></a>
+  <a class="link-item" href="https://share.google/m8HkoyioIbD4fVJU3" target="_blank"><div class="link-icon-box">🌅</div><div class="link-label">Parque Natural de la Albufera</div><div class="link-chevron">›</div></a>
+
+  <div class="cat-label" id="t-cat-routes">🥾 Rutas</div>
+  <a class="link-item" href="https://share.google/7XfM9ViTDkg3TUT2p" target="_blank"><div class="link-icon-box">🌐</div><div class="link-label">Wikiloc · Bola Meteorológica</div><div class="link-chevron">›</div></a>
+  <a class="link-item" href="https://share.google/0kSrV7tBmeaZxvUbu" target="_blank"><div class="link-icon-box">🏖️</div><div class="link-label">Wikiloc · Desembocadura del Júcar</div><div class="link-chevron">›</div></a>
+  <a class="link-item" href="https://share.google/ycQVwo3LEOHCgC1cm" target="_blank"><div class="link-icon-box">⛰️</div><div class="link-label">Wikiloc · Montaña, Castillo y Faro</div><div class="link-chevron">›</div></a>
+
+  <div class="cat-label" id="t-cat-valencia">🏙️ Valencia ciudad</div>
+  <a class="link-item" href="https://share.google/fZfZLuPqPfhh3ezzo" target="_blank"><div class="link-icon-box">🚀</div><div class="link-label">Ciudad de las Artes y las Ciencias</div><div class="link-chevron">›</div></a>
+  <a class="link-item" href="https://share.google/9EMZ2FqP1MhWRbxTV" target="_blank"><div class="link-icon-box">🦁</div><div class="link-label">BIOPARC Valencia</div><div class="link-chevron">›</div></a>
+  <a class="link-item" href="https://share.google/311IHPVp39BTQSw05" target="_blank"><div class="link-icon-box">🗼</div><div class="link-label">Torres de Serranos</div><div class="link-chevron">›</div></a>
+
+  <div class="cat-label" id="t-cat-useful">🛒 Útil</div>
+  <a class="link-item" href="https://share.google/u8MPqRXc8bXQGY7Mu" target="_blank"><div class="link-icon-box">🛍️</div><div class="link-label" id="t-supermarket">Consum Supermercado</div><div class="link-chevron">›</div></a>
+</div>
+
+<!-- CHECK-OUT -->
+<div class="section" id="section-checkout">
+  <div class="sec-heading" id="t-co-heading">Check-out</div>
+  <div class="sec-sub" id="t-co-sub">Antes de las 12:00h</div>
+
+  <div class="card">
+    <div class="card-label" id="t-co-card-label">Antes de salir, por favor</div>
+    <div class="step-row"><div class="step-num">1</div><div class="step-text" id="t-s1">Quita las sábanas y déjalas en el suelo</div></div>
+    <div class="step-row"><div class="step-num">2</div><div class="step-text" id="t-s2">Apaga todas las luces y electrodomésticos</div></div>
+    <div class="step-row"><div class="step-num">3</div><div class="step-text" id="t-s3">Cierra todas las ventanas y puertas</div></div>
+    <div class="step-row"><div class="step-num">4</div><div class="step-text" id="t-s4">Devuelve las llaves a la caja fuerte · código 0152</div></div>
+    <div class="step-row"><div class="step-num">5</div><div class="step-text" id="t-s5">Check-out antes de las 12:00h</div></div>
+  </div>
+
+  <div class="farewell">
+    <div class="farewell-stars">★★★★★</div>
+    <div class="farewell-text" id="t-farewell">
+      Gracias por elegir Villa Cullera.<br>
+      ¡Buen viaje de vuelta y hasta pronto! 🌊
+    </div>
+    <div class="farewell-sub" id="t-farewell-sub">Si os ha gustado, una reseña de 5 estrellas nos ayuda muchísimo 🙏</div>
+    <a href="https://www.airbnb.com" target="_blank" class="review-btn">
+      ⭐ <span id="t-review-btn">Dejar reseña en Airbnb</span>
+    </a>
+  </div>
+</div>
+
+<!-- CONTACTO -->
+<div class="section" id="section-contact">
+  <div class="sec-heading" id="t-contact-heading">Contacto</div>
+  <div class="sec-sub" id="t-contact-sub">Estamos aquí para ayudarte</div>
+
+  <div class="contact-hero">
+    <div class="contact-avatar">👤</div>
+    <div class="contact-name">Jordan B.</div>
+    <div class="contact-role" id="t-contact-role">Co-anfitrión · Villa Cullera</div>
+    <a href="https://wa.me/34614765492" target="_blank" class="wa-btn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.845L.057 23.617a.75.75 0 0 0 .92.92l5.772-1.471A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.853 0-3.587-.5-5.084-1.375l-.36-.214-3.733.952.968-3.636-.235-.374A9.96 9.96 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+      <span id="t-wa-btn">Escríbeme por WhatsApp</span>
+    </a>
+  </div>
+
+  <div class="card">
+    <div class="card-label" id="t-location-label">Ubicación</div>
+    <div class="info-row">
+      <div class="info-icon-box">📍</div>
+      <div class="info-text">
+        <div class="info-label">Villa Cullera</div>
+        <div class="info-val">Calle Barranc de Palomes 52<br>46408 Faro de Cullera, Valencia</div>
+      </div>
+    </div>
+    <a href="https://maps.google.com/?q=Calle+Barranc+de+Palomes+52,+46408+Faro+de+Cullera" target="_blank" class="map-btn">
+      🗺️ <span id="t-map-btn2">Abrir en Google Maps</span>
+    </a>
+  </div>
+</div>
+
+<div class="bottom-spacer"></div>
+
 <script>
-const translations = {
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-card').forEach(b => b.classList.remove('active'));
+  document.getElementById('section-' + id).classList.add('active');
+  document.getElementById('nav-' + id).classList.add('active');
+  window.scrollTo({ top: document.querySelector('.nav-grid').offsetTop - 10, behavior: 'smooth' });
+}
+
+function copyWifi() {
+  navigator.clipboard.writeText('12345678').then(() => {
+    const btn = document.getElementById('t-copy-btn');
+    const orig = btn.textContent;
+    btn.textContent = '✓';
+    setTimeout(() => btn.textContent = orig, 2000);
+  });
+}
+
+const T = {
   es: {
-    eyebrow: "Cullera · Guía para huéspedes",
-    subtitle: "Temporada 2026",
-    title: "Bienvenidos<br>a <em>Villa Cullera</em>",
-    intro: "Os he preparado una selección de rincones imprescindibles — dónde comer, qué descubrir, paisajes que no olvidaréis y los mejores planes por la zona. Todo lo que necesitáis para disfrutar al máximo.",
-    secRestaurants: "🍽️ &nbsp;Restaurantes",
-    secVisit: "🏰 &nbsp;Qué visitar en Cullera",
-    secNature: "🌿 &nbsp;Naturaleza y paisajes",
-    secRoutes: "🥾 &nbsp;Rutas por Cullera",
-    secValencia: "🏙️ &nbsp;Valencia ciudad",
-    secUseful: "🛒 &nbsp;Útil",
-    aquo: "Parque Acuático",
-    birds: "Observación de aves",
-    boat: "Paseos en barca en Cullera",
-    supermarket: "Consum Supermercado",
-    accessTitle: "Acceso a la vivienda",
-    safeLabel: "Caja fuerte · Código",
-    keysLabel: "Llaves incluidas",
-    keysValue: "Entrada principal · Vivienda · Piscina",
-    signoff: "Para cualquier cosa que necesitéis,<br>aquí me tenéis.",
-    whatsapp: "Escríbeme por WhatsApp",
-    role: "Jordan B. · Co-anfitrión · Villa Cullera"
+    eyebrow:'Guía para huéspedes', season:'Temporada 2026',
+    navCheckin:'Check-in', navWifi:'WiFi', navRules:'Normas', navGuide:'Guía local', navCheckout:'Check-out', navContact:'Contacto',
+    checkinHeading:'Acceso', checkinSub:'Todo lo que necesitas para entrar',
+    accessLabel:'Acceso a la vivienda', safeLabel:'Caja fuerte', timeLabel:'Check-in',
+    keysLabel:'Llaves incluidas', key1:'🚪 Entrada', key2:'🏠 Vivienda', key3:'🏊 Piscina',
+    addressLabel:'Dirección', addrLabel:'Dirección completa', deliveryLabel:'Para pedidos a domicilio',
+    mapBtn:'Abrir en Google Maps', mapBtn2:'Abrir en Google Maps',
+    wifiSub:'Conexión rápida y gratuita', wifiNetLabel:'Red WiFi', wifiPassLabel:'Contraseña', copyBtn:'Copiar',
+    wifiTip:'Conéctate a <strong style="color:var(--dark)">capblanc52</strong><br>e introduce la contraseña',
+    rulesHeading:'Normas', rulesSub:'Por favor, respétalas durante tu estancia',
+    r1:'No fumar en el interior de la vivienda', r2:'No se permiten fiestas ni eventos',
+    r3:'Silencio a partir de las 23:00h', r4:'No se admiten mascotas sin autorización',
+    r5:'Cuida la vivienda como si fuera tuya', r6:'Cualquier incidencia, avisa al co-anfitrión',
+    guideHeading:'Guía local', guideSub:'Lo mejor de Cullera y Valencia',
+    catRestaurants:'🍽️ Restaurantes', catVisit:'🏰 Qué visitar', catNature:'🌿 Naturaleza',
+    catRoutes:'🥾 Rutas', catValencia:'🏙️ Valencia ciudad', catUseful:'🛒 Útil',
+    aquo:'Aquopolis — Parque Acuático', azud:'Azud de la Marquesa — Aves',
+    boat:'Paseos en barca en Cullera', supermarket:'Consum Supermercado',
+    coHeading:'Check-out', coSub:'Antes de las 12:00h', coCardLabel:'Antes de salir, por favor',
+    s1:'Quita las sábanas y déjalas en el suelo', s2:'Apaga todas las luces y electrodomésticos',
+    s3:'Cierra todas las ventanas y puertas', s4:'Devuelve las llaves a la caja fuerte · código 0152',
+    s5:'Check-out antes de las 12:00h',
+    farewell:'Gracias por elegir Villa Cullera.<br>¡Buen viaje de vuelta y hasta pronto! 🌊',
+    farewellSub:'Si os ha gustado, una reseña de 5 estrellas nos ayuda muchísimo 🙏',
+    reviewBtn:'Dejar reseña en Airbnb',
+    contactHeading:'Contacto', contactSub:'Estamos aquí para ayudarte',
+    contactRole:'Co-anfitrión · Villa Cullera', waBtn:'Escríbeme por WhatsApp',
+    locationLabel:'Ubicación'
   },
   en: {
-    eyebrow: "Cullera · Guest Guide",
-    subtitle: "Season 2026",
-    title: "Welcome<br>to <em>Villa Cullera</em>",
-    intro: "I've put together a selection of must-see spots — where to eat, what to discover, landscapes you won't forget and the best things to do in the area. Everything you need to make the most of your stay.",
-    secRestaurants: "🍽️ &nbsp;Restaurants",
-    secVisit: "🏰 &nbsp;What to visit in Cullera",
-    secNature: "🌿 &nbsp;Nature & Landscapes",
-    secRoutes: "🥾 &nbsp;Hiking routes in Cullera",
-    secValencia: "🏙️ &nbsp;Valencia city",
-    secUseful: "🛒 &nbsp;Useful",
-    aquo: "Water Park",
-    birds: "Birdwatching area",
-    boat: "Boat trips in Cullera",
-    supermarket: "Consum Supermarket",
-    accessTitle: "Property access",
-    safeLabel: "Safe box · Code",
-    keysLabel: "Keys included",
-    keysValue: "Main entrance · Apartment · Swimming pool",
-    signoff: "For anything you may need,<br>you know where to find me.",
-    whatsapp: "Message me on WhatsApp",
-    role: "Jordan B. · Co-host · Villa Cullera"
+    eyebrow:'Guest Guide', season:'Season 2026',
+    navCheckin:'Check-in', navWifi:'WiFi', navRules:'House Rules', navGuide:'Local Guide', navCheckout:'Check-out', navContact:'Contact',
+    checkinHeading:'Access', checkinSub:'Everything you need to get in',
+    accessLabel:'Property access', safeLabel:'Safe box', timeLabel:'Check-in',
+    keysLabel:'Keys included', key1:'🚪 Entrance', key2:'🏠 Apartment', key3:'🏊 Pool',
+    addressLabel:'Address', addrLabel:'Full address', deliveryLabel:'For food delivery',
+    mapBtn:'Open in Google Maps', mapBtn2:'Open in Google Maps',
+    wifiSub:'Fast & free connection', wifiNetLabel:'WiFi Network', wifiPassLabel:'Password', copyBtn:'Copy',
+    wifiTip:'Connect to <strong style="color:var(--dark)">capblanc52</strong><br>and enter the password',
+    rulesHeading:'House Rules', rulesSub:'Please respect them during your stay',
+    r1:'No smoking inside the property', r2:'No parties or events allowed',
+    r3:'Quiet hours after 23:00', r4:'No pets without prior authorisation',
+    r5:'Please take care of the property', r6:'Report any issue to the co-host',
+    guideHeading:'Local Guide', guideSub:'The best of Cullera & Valencia',
+    catRestaurants:'🍽️ Restaurants', catVisit:'🏰 What to visit', catNature:'🌿 Nature',
+    catRoutes:'🥾 Hiking routes', catValencia:'🏙️ Valencia city', catUseful:'🛒 Useful',
+    aquo:'Aquopolis — Water Park', azud:'Azud de la Marquesa — Birdwatching',
+    boat:'Boat trips in Cullera', supermarket:'Consum Supermarket',
+    coHeading:'Check-out', coSub:'Before 12:00', coCardLabel:'Before you leave, please',
+    s1:'Strip the beds and leave the sheets on the floor', s2:'Turn off all lights and appliances',
+    s3:'Close all windows and doors', s4:'Return keys to the safe · code 0152',
+    s5:'Check-out before 12:00',
+    farewell:'Thank you for choosing Villa Cullera.<br>Safe travels and see you soon! 🌊',
+    farewellSub:'If you enjoyed your stay, a 5-star review means the world to us 🙏',
+    reviewBtn:'Leave a review on Airbnb',
+    contactHeading:'Contact', contactSub:'We are here to help',
+    contactRole:'Co-host · Villa Cullera', waBtn:'Message me on WhatsApp',
+    locationLabel:'Location'
   },
   fr: {
-    eyebrow: "Cullera · Guide des hôtes",
-    subtitle: "Saison 2026",
-    title: "Bienvenue<br>à <em>Villa Cullera</em>",
-    intro: "J'ai préparé pour vous une sélection de lieux incontournables — où manger, quoi découvrir, des paysages inoubliables et les meilleures activités de la région. Tout ce qu'il vous faut pour profiter au maximum.",
-    secRestaurants: "🍽️ &nbsp;Restaurants",
-    secVisit: "🏰 &nbsp;À visiter à Cullera",
-    secNature: "🌿 &nbsp;Nature et paysages",
-    secRoutes: "🥾 &nbsp;Randonnées à Cullera",
-    secValencia: "🏙️ &nbsp;La ville de Valence",
-    secUseful: "🛒 &nbsp;Pratique",
-    aquo: "Parc aquatique",
-    birds: "Observation des oiseaux",
-    boat: "Promenades en barque à Cullera",
-    supermarket: "Supermarché Consum",
-    accessTitle: "Accès au logement",
-    safeLabel: "Coffre-fort · Code",
-    keysLabel: "Clés incluses",
-    keysValue: "Entrée principale · Appartement · Piscine",
-    signoff: "Pour tout ce dont vous aurez besoin,<br>vous savez où me trouver.",
-    whatsapp: "Écrivez-moi sur WhatsApp",
-    role: "Jordan B. · Co-hôte · Villa Cullera"
+    eyebrow:'Guide des hôtes', season:'Saison 2026',
+    navCheckin:'Arrivée', navWifi:'WiFi', navRules:'Règles', navGuide:'Guide', navCheckout:'Départ', navContact:'Contact',
+    checkinHeading:'Accès', checkinSub:'Tout ce dont vous avez besoin pour entrer',
+    accessLabel:'Accès au logement', safeLabel:'Coffre-fort', timeLabel:'Arrivée',
+    keysLabel:'Clés incluses', key1:'🚪 Entrée', key2:'🏠 Appartement', key3:'🏊 Piscine',
+    addressLabel:'Adresse', addrLabel:'Adresse complète', deliveryLabel:'Pour les livraisons',
+    mapBtn:'Ouvrir dans Google Maps', mapBtn2:'Ouvrir dans Google Maps',
+    wifiSub:'Connexion rapide et gratuite', wifiNetLabel:'Réseau WiFi', wifiPassLabel:'Mot de passe', copyBtn:'Copier',
+    wifiTip:'Connectez-vous à <strong style="color:var(--dark)">capblanc52</strong><br>et entrez le mot de passe',
+    rulesHeading:'Règles', rulesSub:'Merci de les respecter pendant votre séjour',
+    r1:'Il est interdit de fumer à l\'intérieur', r2:'Les fêtes ne sont pas autorisées',
+    r3:'Silence après 23h00', r4:'Animaux non acceptés sans autorisation',
+    r5:'Prenez soin du logement', r6:'Signalez tout problème à l\'hôte',
+    guideHeading:'Guide local', guideSub:'Le meilleur de Cullera et Valence',
+    catRestaurants:'🍽️ Restaurants', catVisit:'🏰 À visiter', catNature:'🌿 Nature',
+    catRoutes:'🥾 Randonnées', catValencia:'🏙️ Valence', catUseful:'🛒 Pratique',
+    aquo:'Aquopolis — Parc aquatique', azud:'Azud de la Marquesa — Oiseaux',
+    boat:'Promenades en barque', supermarket:'Supermarché Consum',
+    coHeading:'Départ', coSub:'Avant 12h00', coCardLabel:'Avant de partir, merci de',
+    s1:'Retirer les draps des lits et les laisser sur le sol', s2:'Éteindre lumières et appareils',
+    s3:'Fermer toutes les fenêtres et portes', s4:'Remettre les clés dans le coffre · code 0152',
+    s5:'Quitter le logement avant 12h00',
+    farewell:'Merci d\'avoir choisi Villa Cullera.<br>Bon retour et à très bientôt ! 🌊',
+    farewellSub:'Un avis 5 étoiles nous aide énormément 🙏',
+    reviewBtn:'Laisser un avis sur Airbnb',
+    contactHeading:'Contact', contactSub:'Nous sommes là pour vous aider',
+    contactRole:'Co-hôte · Villa Cullera', waBtn:'Écrivez-moi sur WhatsApp',
+    locationLabel:'Localisation'
   }
 };
 
 function setLang(lang) {
-  const t = translations[lang];
-  document.getElementById('t-eyebrow').innerHTML = t.eyebrow;
-  document.getElementById('t-subtitle').innerHTML = t.subtitle;
-  document.querySelector('.title').innerHTML = t.title;
-  document.getElementById('t-intro').innerHTML = t.intro;
-  document.getElementById('t-sec-restaurants').innerHTML = t.secRestaurants;
-  document.getElementById('t-sec-visit').innerHTML = t.secVisit;
-  document.getElementById('t-sec-nature').innerHTML = t.secNature;
-  document.getElementById('t-sec-routes').innerHTML = t.secRoutes;
-  document.getElementById('t-sec-valencia').innerHTML = t.secValencia;
-  document.getElementById('t-sec-useful').innerHTML = t.secUseful;
-  document.querySelectorAll('.t-aquo').forEach(el => el.innerHTML = t.aquo);
-  document.querySelectorAll('.t-birds').forEach(el => el.innerHTML = t.birds);
-  document.getElementById('t-boat').innerHTML = t.boat;
-  document.getElementById('t-supermarket').innerHTML = t.supermarket;
-  document.getElementById('t-access-title').innerHTML = t.accessTitle;
-  document.getElementById('t-safe-label').innerHTML = t.safeLabel;
-  document.getElementById('t-keys-label').innerHTML = t.keysLabel;
-  document.getElementById('t-keys-value').innerHTML = t.keysValue;
-  document.getElementById('t-signoff').innerHTML = t.signoff;
-  document.getElementById('t-whatsapp').innerHTML = t.whatsapp;
-  document.getElementById('t-role').innerHTML = t.role;
-  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+  const t = T[lang];
+  const set = (id, val) => { const el = document.getElementById(id); if(el) el.innerHTML = val; };
+  set('t-eyebrow', t.eyebrow); set('t-season', t.season);
+  set('t-nav-checkin', t.navCheckin); set('t-nav-wifi', t.navWifi);
+  set('t-nav-rules', t.navRules); set('t-nav-guide', t.navGuide);
+  set('t-nav-checkout', t.navCheckout); set('t-nav-contact', t.navContact);
+  set('t-checkin-heading', t.checkinHeading); set('t-checkin-sub', t.checkinSub);
+  set('t-access-label', t.accessLabel); set('t-safe-label', t.safeLabel);
+  set('t-time-label', t.timeLabel); set('t-keys-label', t.keysLabel);
+  set('t-key1', t.key1); set('t-key2', t.key2); set('t-key3', t.key3);
+  set('t-address-label', t.addressLabel); set('t-addr-label', t.addrLabel);
+  set('t-delivery-label', t.deliveryLabel);
+  set('t-map-btn', t.mapBtn); set('t-map-btn2', t.mapBtn2);
+  set('t-wifi-sub', t.wifiSub); set('t-wifi-net-label', t.wifiNetLabel);
+  set('t-wifi-pass-label', t.wifiPassLabel); set('t-copy-btn', t.copyBtn);
+  set('t-wifi-tip', t.wifiTip);
+  set('t-rules-heading', t.rulesHeading); set('t-rules-sub', t.rulesSub);
+  set('t-r1', t.r1); set('t-r2', t.r2); set('t-r3', t.r3);
+  set('t-r4', t.r4); set('t-r5', t.r5); set('t-r6', t.r6);
+  set('t-guide-heading', t.guideHeading); set('t-guide-sub', t.guideSub);
+  set('t-cat-restaurants', t.catRestaurants); set('t-cat-visit', t.catVisit);
+  set('t-cat-nature', t.catNature); set('t-cat-routes', t.catRoutes);
+  set('t-cat-valencia', t.catValencia); set('t-cat-useful', t.catUseful);
+  set('t-aquo', t.aquo); set('t-azud', t.azud);
+  set('t-boat', t.boat); set('t-supermarket', t.supermarket);
+  set('t-co-heading', t.coHeading); set('t-co-sub', t.coSub);
+  set('t-co-card-label', t.coCardLabel);
+  set('t-s1', t.s1); set('t-s2', t.s2); set('t-s3', t.s3);
+  set('t-s4', t.s4); set('t-s5', t.s5);
+  set('t-farewell', t.farewell); set('t-farewell-sub', t.farewellSub);
+  set('t-review-btn', t.reviewBtn);
+  set('t-contact-heading', t.contactHeading); set('t-contact-sub', t.contactSub);
+  set('t-contact-role', t.contactRole); set('t-wa-btn', t.waBtn);
+  set('t-location-label', t.locationLabel);
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
   document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
-  document.documentElement.lang = lang;
 }
 </script>
 </body>
